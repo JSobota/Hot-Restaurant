@@ -43,7 +43,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">Current Reservations</h4>
                     </div>
-                    <div class="panel-body" id="tabelSelection">
+                    <div class="panel-body" id="tableSection">
                     </div>
                 </div>
             </div>
@@ -73,26 +73,30 @@
         function runTableQuery() {
           var currentURL = window.location.origin;
 
-          $ajax({url: currentURL + "/api/tables", method: "GET"}).done(function(tableData){
+          $.ajax({url: currentURL + "/api/table", method: "GET"}).done(function(tableData){
             console.log("--------------------------------");
-            console.log("URL: " + currentURL + '/api/tables');
+            console.log("URL: " + currentURL + '/api/table');
             console.log("--------------------------------");
             console.log(tableData);
             console.log("--------------------------------")
 
             for (var i = 0; i < tableData.length; i++) {
-              var tabelSelection = $("<div>");
-              tabelSelection.addClass('well');
-              tabelSelection.attr('id', 'tableWell-' + i+1)
-              $('#tableSelection').append(tableSelection);
-
+              var tableSection = $("<div>");
+              tableSection.addClass('well');
+              tableSection.attr('id', 'tableWell-' + i+1);
+              $('#tableSection').append(tableSection);
+            console.log (tableSection);
               var tableNumber = i + 1;
 
-              $("#tableWell-" + i+1).append('<h2><span class="label label-primary>' + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
+              console.log(tableNumber);
+              //console.log(tableData[i].customerID);
+
+              $("#tableWell-" + i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
             }
           });
         }
 
+        runTableQuery();
         // function runWaitListQuery() {
 
         //   var curr
